@@ -17,6 +17,7 @@ class ChatbotAPITestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.conten, {"response": "Customer not found in Salesforce"})
 
+    @patch('salesforce_api.get_customer_data')
     def test_chatbot_no_email_provided(self):
         response = self.client.get(self.chatbot_url, {'message': 'customer'})
         self.assertEqual(response.status_code, 200)
